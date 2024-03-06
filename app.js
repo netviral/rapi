@@ -16,20 +16,20 @@ var command = 'aplay';
     try {
         if(allowed.includes(req.params.id)){
             res.redirect("/");
-            await sound.play(req.params.id+".wav");
+            // await sound.play(req.params.id+".wav");
             command += " "+req.params.id+".wav";
             // Execute the command
-            // exec(command, (error, stdout, stderr) => {
-            //     if (error) {
-            //     console.error(`Error executing the command: ${error.message}`);
-            //     return;
-            //     }
-            //     if (stderr) {
-            //     console.error(`Command stderr: ${stderr}`);
-            //     return;
-            //     }
-            //     console.log(`Command stdout: ${stdout}`);
-            // });
+            exec(command, (error, stdout, stderr) => {
+                if (error) {
+                console.error(`Error executing the command: ${error.message}`);
+                return;
+                }
+                if (stderr) {
+                console.error(`Command stderr: ${stderr}`);
+                return;
+                }
+                console.log(`Command stdout: ${stdout}`);
+            });
         }else{
             res.sendStatus(404);
         }
